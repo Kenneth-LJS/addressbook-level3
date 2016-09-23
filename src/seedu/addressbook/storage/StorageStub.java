@@ -2,7 +2,6 @@ package seedu.addressbook.storage;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
-import seedu.addressbook.storage.StorageFile.StorageOperationException;
 import seedu.addressbook.storage.jaxb.AdaptedAddressBook;
 
 import javax.xml.bind.JAXBContext;
@@ -24,15 +23,6 @@ public class StorageStub implements Storage {
     /* Note: Note the use of nested classes below.
      * More info https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
      */
-
-    /**
-     * Signals that the given file path does not fulfill the storage filepath constraints.
-     */
-    public static class InvalidStorageFilePathException extends IllegalValueException {
-        public InvalidStorageFilePathException(String message) {
-            super(message);
-        }
-    }
 
     private final JAXBContext jaxbContext;
 
@@ -74,24 +64,8 @@ public class StorageStub implements Storage {
      *
      * @throws StorageOperationException if there were errors converting and/or storing data to file.
      */
-    public void save(AddressBook addressBook) throws StorageOperationException {
-
-        /* Note: Note the 'try with resource' statement below.
-         * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
-         */
-        try (final Writer fileWriter =
-                     new BufferedWriter(new FileWriter(path.toFile()))) {
-
-            final AdaptedAddressBook toSave = new AdaptedAddressBook(addressBook);
-            final Marshaller marshaller = jaxbContext.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.marshal(toSave, fileWriter);
-
-        } catch (IOException ioe) {
-            throw new StorageOperationException("Error writing to file: " + path + " error: " + ioe.getMessage());
-        } catch (JAXBException jaxbe) {
-            throw new StorageOperationException("Error converting address book into storage format");
-        }
+    public void save(AddressBook addressBook) {
+    	// do nothing
     }
 
     /**
