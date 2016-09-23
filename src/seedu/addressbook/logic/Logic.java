@@ -5,6 +5,7 @@ import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.parser.Parser;
+import seedu.addressbook.storage.InvalidStorageFilePathException;
 import seedu.addressbook.storage.Storage;
 import seedu.addressbook.storage.StorageFile;
 
@@ -46,7 +47,7 @@ public class Logic {
      * Creates the StorageFile object based on the user specified path (if any) or the default storage path.
      * @throws StorageFile.InvalidStorageFilePathException if the target file path is incorrect.
      */
-    private StorageFile initializeStorage() throws StorageFile.InvalidStorageFilePathException {
+    private StorageFile initializeStorage() throws InvalidStorageFilePathException {
         return new StorageFile();
     }
 
